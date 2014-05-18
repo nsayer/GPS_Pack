@@ -98,7 +98,7 @@
 #define HINT_TYPE_NONE 3
 #define HINT_TYPE_LAST HINT_TYPE_NONE
 
-#define VERSION "v1.1"
+#define VERSION "v1.2"
 
 // Thanks to Gareth Evans at http://todbot.com/blog/2008/06/19/how-to-do-big-strings-in-arduino/
 // Note that you must be careful not to use this macro more than once per "statement", lest you
@@ -238,6 +238,8 @@ void sleep() {
   digitalWrite(POWER_EN, HIGH);  
   display.begin(16, 2);
   display.clear();
+  // This method requires a patch to TinyGPS. See https://github.com/mikalhart/TinyGPS/pull/3
+  gps.clear_fix();
   Serial.begin(GPS_BAUD);
   delay(100);
   Serial.println(P(PMTK_SET_NMEA_UPDATE_5HZ));
